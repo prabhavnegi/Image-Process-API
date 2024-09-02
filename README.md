@@ -81,4 +81,4 @@ Start flask application
 ```
 ## Documentation
 
-[Low level Description and Postman collection](https://docs.google.com/document/d/1HxIX4x20ux83OvdoUCrqhxCfidefrRHtxlxsNsYOxaI/edit
+[Low level Description and Postman collection](https://docs.google.com/document/d/1HxIX4x20ux83OvdoUCrqhxCfidefrRHtxlxsNsYOxaI/edit?usp=sharing)
