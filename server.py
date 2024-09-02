@@ -3,7 +3,7 @@ from werkzeug.utils import secure_filename
 from process import process_images
 import os
 import uuid
-from model import db, FileStatus
+from model import db, File_status
 from flask_migrate import Migrate 
 from celery_config import celery_init_app
 from util import validate_csv_format
@@ -34,7 +34,7 @@ migrate = Migrate(app, db)
 @app.route("/upload", methods=['POST'] )
 def upload():
     if 'file' not in request.files:
-        return jsonify({'error': 'No selected file'}), 400
+        return jsonify({'error': 'No file part in the request'}), 400
                 
     file = request.files['file']
     if file.filename == '':
@@ -47,7 +47,7 @@ def upload():
             return jsonify({'error': result[1]}), 400
 
         file.seek(0)
-        
+
         if not os.path.exists(app.config['PROCESSED_FOLDER']):
             os.makedirs(app.config['PROCESSED_FOLDER'])
 
@@ -60,7 +60,7 @@ def upload():
         file.save(file_path)
 
         #Updating Database with the status
-        file_status = FileStatus(id=request_id, original_file_path=os.path.abspath(file_path), status='Pending', final_file_path='')
+        file_status = File_status(id=request_id, original_file_path=os.path.abspath(file_path), status='Pending', final_file_path='')
         db.session.add(file_status)
         db.session.commit()
 
@@ -75,7 +75,7 @@ def upload():
 def status():
 
     request_id = request.args.get('id')
-    file_status = FileStatus.query.filter_by(id=request_id).first()
+    file_status = File_status.query.filter_by(id=request_id).first()
     if file_status:
         return jsonify({
             'Request_id': file_status.id,

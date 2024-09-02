@@ -4,7 +4,7 @@ from io import BytesIO
 import uuid
 import os
 import requests
-from model import db, FileStatus
+from model import db, File_status
 
 
 
@@ -44,7 +44,7 @@ def process_images(request_id, file_path, processed_folder):
         csv_file_path = os.path.join(processed_folder, csv_filename)
         results_df.to_csv(csv_file_path, index=False)
 
-        file_status = FileStatus.query.get(request_id)
+        file_status = File_status.query.get(request_id)
         if file_status:
             file_status.status = 'Completed'
             file_status.final_file_path = os.path.abspath(csv_file_path)
@@ -52,7 +52,7 @@ def process_images(request_id, file_path, processed_folder):
 
     except Exception as e:
         print(e)
-        file_status = FileStatus.query.get(request_id)
+        file_status = File_status.query.get(request_id)
         if file_status:
             file_status.status = 'Failed'
             db.session.commit()
