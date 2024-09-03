@@ -1,4 +1,4 @@
-Image Process API
+# Image Process API
 
                             
 This API is made using Flask as the main server.
