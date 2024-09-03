@@ -43,11 +43,13 @@ Go to the project directory
 Create a virtual environment
 ```bash
   python -m venv venv
-
+```
   # On Windows
+```bash
   venv\Scripts\activate
-
+```
   # On macOS/Linux
+```bash
   source venv/bin/activate
 ```
 
@@ -60,19 +62,20 @@ Install dependencies
 Initialize database migration
 ```bash
   flask db init
-
+```
+```bash
   flask db migrate -m "Initial migration"
-
+```
+```bash
   flask db upgrade
 ```
 
 Start your Redis server and PostgreSQL
 
 Start Celery worker
-```bash
   #On Windows
-
-  celery -A server.celery worker --pool=solo -loggerinfo=true
+```bash
+  celery -A server.celery worker --pool=solo -loglevel=info
 ```
 
 Start flask application
