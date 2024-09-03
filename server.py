@@ -7,6 +7,7 @@ from model import db, File_status
 from flask_migrate import Migrate 
 from celery_config import celery_init_app
 from util import validate_csv_format
+from storage import s3
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -85,5 +86,10 @@ def status():
     else:
         return jsonify({'error': 'Request ID not found'}), 404
     
+#Testing Route    
+@app.route('/test', methods=['GET'])
+def test():
+    return jsonify("Flask server working"), 200
+
 if __name__ == "__main__":
     app.run()
