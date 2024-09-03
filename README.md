@@ -75,7 +75,7 @@ Start your Redis server and PostgreSQL
 Start Celery worker
   #On Windows
 ```bash
-  celery -A server.celery worker --pool=solo -loglevel=info
+  celery -A server.celery worker --pool=solo --loglevel=info
 ```
 
 Start flask application
