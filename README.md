@@ -8,7 +8,7 @@ Asynchronous image processing uses celery for background processing and PostgreS
 
 It takes a CSV file, processes every image, then comps it to 50%, and saves it as another CSV file.
 
-The project uses local storage to store the files and PostgreSQL to maintain the status and final link of the output CSV file.
+The project uses AWS S3 storage to store the files and PostgreSQL to maintain the status and final link of the output CSV file.
 
 
 ## Environment Variables
@@ -22,6 +22,14 @@ To run this project, you will need to add the following environment variables to
 `FLASK_RUN_PORT`
 
 `SQLALCHEMY_DATABASE_URI`
+
+`AWS_ACCESS_KEY_ID`
+
+`AWS_SECRET_ACCESS_KEY`
+
+`BUCKET_NAME`
+
+`AWS_REGION`
 
 
 
