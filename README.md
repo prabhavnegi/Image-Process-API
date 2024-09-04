@@ -10,6 +10,8 @@ It takes a CSV file, processes every image, then comps it to 50%, and saves it a
 
 The project uses AWS S3 storage to store the files and PostgreSQL to maintain the status and final link of the output CSV file.
 
+Docker and Docker compose file added. 
+
 
 ## Environment Variables
 
@@ -89,6 +91,15 @@ Start Celery worker
 Start flask application
 ``` 
   flask Run
+```
+## To run Docker
+Copy the .env file and name it .env_docker.
+
+Change the Redis and Postgres URL variables according to the docker-compose file.
+
+Run docker container
+```
+  docker compose up -d
 ```
 ## Documentation
 
