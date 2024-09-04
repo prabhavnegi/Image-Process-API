@@ -1,0 +1,35 @@
+# Python cache directories
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Test and coverage reports
+*.log
+*.coverage
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Pytest cache
+pytest_cache/
+
+# IDE/editor specific files
+.vscode/
+.idea/
+
+# Git repository
+.git/
+
+.env
+.env_docker

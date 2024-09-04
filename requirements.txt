@@ -4,7 +4,7 @@ billiard==4.2.0
 blinker==1.8.2
 boto3==1.35.10
 botocore==1.35.10
-celery @ https://github.com/celery/celery/zipball/main#sha256=98ee5bce7b277beb2e8e9b27a217a6077b27f81810b3a279dfeb336ca00b6038
+celery==5.5.0b2
 certifi==2024.8.30
 charset-normalizer==3.3.2
 click==8.1.7

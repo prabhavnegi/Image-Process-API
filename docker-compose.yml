@@ -1,0 +1,40 @@
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    env_file: .env_docker
+    ports: 
+      - 5000:5000
+    volumes: 
+      - .:/app
+    depends_on:
+      - db
+      - redis
+  worker:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    env_file: .env_docker
+    command: celery -A server.celery worker --pool=solo --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - db
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+  db:
+    image: postgres:16-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=Image_Process
+    restart: unless-stopped
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    

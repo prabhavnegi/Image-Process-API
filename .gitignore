@@ -9,6 +9,7 @@ __pycache__/
 
 # Environment
 .env
+.env_docker
 
 # Flask-related
 instance/
@@ -56,3 +57,7 @@ celerybeat.pid
 # OS-specific files
 .DS_Store
 Thumbs.db
+
+# Folder
+postgres_data/
+processed_data/

@@ -7,7 +7,6 @@ from model import db, File_status
 from flask_migrate import Migrate 
 from celery_config import celery_init_app
 from util import validate_csv_format
-from storage import s3
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -22,8 +21,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #Celery Setup
 app.config.from_mapping(
     CELERY=dict(
-        broker_url="redis://127.0.0.1:6379/0",
-        result_backend="redis://127.0.0.1:6379/0",
+        broker_url=os.getenv("BROKER_URL"),
+        result_backend=os.getenv("RESULT_BACKEND"),
     ),
 )
 celery = celery_init_app(app)
@@ -55,7 +54,7 @@ def upload():
         filename = secure_filename(file.filename)
         request_id = str(uuid.uuid4())
 
-        os.makedirs(app.config['PROCESSED_FOLDER']+ "\\" + request_id)
+        os.makedirs(os.path.join(app.config['PROCESSED_FOLDER'], request_id))
 
         file_path = os.path.join(app.config['PROCESSED_FOLDER'], request_id, request_id + '_' + filename)
         file.save(file_path)
@@ -66,7 +65,7 @@ def upload():
         db.session.commit()
 
         #Calling Celery to process the image
-        process_images.delay(request_id, file_path, app.config['PROCESSED_FOLDER']+"\\"+request_id, )
+        process_images.delay(request_id, file_path, os.path.join(app.config['PROCESSED_FOLDER'],request_id))
 
         return jsonify({'Request_id': request_id}), 200
         
